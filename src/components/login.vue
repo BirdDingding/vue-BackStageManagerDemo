@@ -38,7 +38,7 @@ export default {
         ],
         password: [
           { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 6, max: 12, message: "长度在 6 到 5 个字符", trigger: "blur" }
+          { min: 6, max: 12, message: "长度在 6 到 14 个字符", trigger: "blur" }
         ]
       }
     };
@@ -47,9 +47,20 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+        //   alert("submit!");
+            this.$http.post('login',this.formData).then(res => {
+                if (res.data.meta.status === 400) {
+                    this.$message.error(res.data.meta.msg)
+                } else {
+                    this.$message.success(res.data.meta.msg)
+                    // 使用sessionStorage存储 token
+                    window.sessionStorage.setItem('token',res.data.data.token)
+                    // 编程式跳转
+                    this.$router.push('/')
+                }
+            })
         } else {
-            this.$message("请输入正确的账号和密码")
+          this.$message("请输入正确的账号和密码");
           return false;
         }
       });

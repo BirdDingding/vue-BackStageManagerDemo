@@ -4,17 +4,22 @@ Vue.use(VueRouter)
 
 // 导入组件
 import login from '../components/login.vue'
+import index from '../components/index.vue'
 
 // 路由规则
 let routes = [
     {
-        path: '/',
-        redirect: '/login'
-    },
-    {
         // 登陆组件
         path: '/login',
         component: login
+    },
+    {
+        path: '',
+        redirect: 'index'
+    },
+    {
+        path: '/index',
+        component: index
     }
 ]
 
