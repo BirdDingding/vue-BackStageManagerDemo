@@ -3,11 +3,16 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // 导入组件
-import login from '../components/login'
+import login from '../components/login.vue'
 
 // 路由规则
 let routes = [
     {
+        path: '/',
+        redirect: '/login'
+    },
+    {
+        // 登陆组件
         path: '/login',
         component: login
     }
